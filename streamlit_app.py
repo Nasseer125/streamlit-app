@@ -8,7 +8,7 @@ data = pd.read_csv('df_merge.csv')
 df_ratings = pd.read_csv('df_ratings.csv')
 df_movies = pd.read_csv('df_movies.csv')
 
-def generate_recommendation(model, user_id, ratings_df, movies_df, movie_id):
+def generate_recommendation(model, user_id, ratings_df, movies_df, n_items):
     # Obtenez une liste de tous les identifiants de films à partir de l'ensemble de données
     movie_ids = df_ratings["movieId"].unique()
     # Obtenir une liste de tous les films qui ont été regardés par l'utilisateur.
@@ -37,16 +37,16 @@ st.title("Système de recommandation de films")
 
 # Formulaire de saisie utilisateur
 user_id = st.text_input("Entrez l'ID de l'utilisateur:")
-movie_id = st.text_input("Entrez l'ID du film:")
+n_items = st.text_input("Entrez l'ID du film:")
 
 if user_id and movie_id:
     try:
         user_id = int(user_id)
-        movie_id = int(movie_id)
+        n_items = int(movie_id)
 
         # Faire une recommandation en utilisant le modèle hybride
-        prediction = generate_recommendation(hybrid_model,user_id,df_ratings,df_movies,movie_id)
+        prediction = generate_recommendation(hybrid_model,user_id,df_ratings,df_movies,n_items)
 
-        st.write(f"La prédiction de la note pour l'utilisateur {user_id} et le film {movie_id} est {prediction:.2f}")
+        st.write(f"La prédiction de la note pour l'utilisateur {user_id} et le film {n_items} est {prediction:.2f}")
     except ValueError:
         st.write("Veuillez entrer des valeurs numériques valides.")
