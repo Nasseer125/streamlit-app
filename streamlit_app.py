@@ -3,7 +3,9 @@ import streamlit as st
 import joblib
 
 # Chargement des données (contenant les noms des films, les identifiants de films et les genres)
-data = pd.read_csv('votre_fichier_de_donnees.csv')
+data = pd.read_csv('df_merge.csv')
+df_ratings = pd.read_csv('df_ratings.csv')
+df_movies = pd.read_csv('df_movies.csv')
 
 # Charger le modèle hybride
 hybrid_model = joblib.load("svdpp_model.pkl")
