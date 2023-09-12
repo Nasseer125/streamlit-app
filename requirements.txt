@@ -4,7 +4,7 @@ streamlit==1.26.0
 streamlit-option-menu==0.3.2
 scikit-learn==1.0.1
 joblib==0.17.0
-surprise == 1.0.2
+surprise==0.1.1
 
 python == 3.11
 plotly == 5.1.0
