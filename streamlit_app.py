@@ -42,7 +42,7 @@ n_items = st.text_input("Entrez l'ID du film:")
 if user_id and movie_id:
     try:
         user_id = int(user_id)
-        n_items = int(movie_id)
+        n_items = int(n_items)
 
         # Faire une recommandation en utilisant le modèle hybride
         prediction = generate_recommendation(hybrid_model,user_id,df_ratings,df_movies,n_items)
