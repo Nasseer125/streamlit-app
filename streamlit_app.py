@@ -7,33 +7,7 @@ data = pd.read_csv('df_merge.csv')
 df_ratings = pd.read_csv('df_ratings.csv')
 df_movies = pd.read_csv('df_movies.csv')
 
-# Charger le modèle hybride
-hybrid_model = joblib.load("svdpp_model.pkl")
-
-# Interface utilisateur Streamlit
-st.title("Système de recommandation de films")
-
-# Champ de saisie pour l'identifiant ou le nom d'utilisateur
-user_input = st.text_input('Entrez votre identifiant ou nom d\'utilisateur :')
-
-if user_input:
-    # Faites des recommandations avec le modèle
-    user_id = trouver_id_utilisateur(user_input)  # Fonction pour trouver l'ID de l'utilisateur
-    recommendations = faire_des_recommandations(hybrid_model, user_id)
-
-    # Correspondance des identifiants de films aux noms de films et aux genres
-    movie_id_to_name = dict(zip(data['movieId'], data['title']))
-    movie_id_to_genre = dict(zip(data['movieId'], data['genres']))
-
-    # Affichage des recommandations de films avec les genres
-    st.header('Films Recommandés avec Genres :')
-    for movie_id in recommendations:
-        st.write(f"Nom du Film : {movie_id_to_name[movie_id]}")
-        st.write(f"Genres : {movie_id_to_genre[movie_id]}")
-        st.write("\n")
-
-
-def generate_recommendation(model, user_id, ratings_df, movies_df, n_items):
+def generate_recommendation(model, user_id, ratings_df, movies_df, movie_id):
     # Obtenez une liste de tous les identifiants de films à partir de l'ensemble de données
     movie_ids = df_ratings["movieId"].unique()
     # Obtenir une liste de tous les films qui ont été regardés par l'utilisateur.
@@ -54,3 +28,24 @@ def generate_recommendation(model, user_id, ratings_df, movies_df, n_items):
         movie_id = movie_ids_to_pred[i]
         print(df_movies[df_movies["movieId"]==movie_id]["title"].values[0], pred_ratings[i])
 
+# Charger le modèle hybride
+hybrid_model = joblib.load("svdpp_model.pkl")
+
+# Interface utilisateur Streamlit
+st.title("Système de recommandation de films")
+
+# Formulaire de saisie utilisateur
+user_id = st.text_input("Entrez l'ID de l'utilisateur:")
+movie_id = st.text_input("Entrez l'ID du film:")
+
+if user_id and movie_id:
+    try:
+        user_id = int(user_id)
+        movie_id = int(movie_id)
+
+        # Faire une recommandation en utilisant le modèle hybride
+        prediction = generate_recommendation(hybrid_model,user_id,df_ratings,df_movies,movie_id)
+
+        st.write(f"La prédiction de la note pour l'utilisateur {user_id} et le film {movie_id} est {prediction:.2f}")
+    except ValueError:
+        st.write("Veuillez entrer des valeurs numériques valides.")
