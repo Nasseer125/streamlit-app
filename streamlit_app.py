@@ -19,7 +19,7 @@ user_input = st.text_input('Entrez votre identifiant ou nom d\'utilisateur :')
 if user_input:
     # Faites des recommandations avec le modèle
     user_id = trouver_id_utilisateur(user_input)  # Fonction pour trouver l'ID de l'utilisateur
-    recommendations = faire_des_recommandations(model, user_id)
+    recommendations = faire_des_recommandations(hybrid_model, user_id)
 
     # Correspondance des identifiants de films aux noms de films et aux genres
     movie_id_to_name = dict(zip(data['movieId'], data['title']))
