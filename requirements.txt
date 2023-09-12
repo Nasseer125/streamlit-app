@@ -24,3 +24,4 @@ jupyter_nbextensions_configurator = "^0.4.1"
 flake8 = "^3.8.4"
 great-expectations = "^0.13.19"
 chardet = "^4.0.0"
+poetry export -f requirements.txt --output requirements.txt
