@@ -3,7 +3,7 @@ import streamlit as st
 import joblib
 
 # Charger le modèle hybride
-hybrid_model = joblib.load("hydrid_model.pkl")
+hybrid_model = joblib.load("HybridModelRec.pkl")
 
 # Interface utilisateur Streamlit
 st.title("Système de recommandation de films")
