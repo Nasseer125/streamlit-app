@@ -3,7 +3,7 @@ pickle-mixin==1.0.2
 streamlit==1.2.0
 streamlit-option-menu==0.3.2
 scikit-learn==1.0.1
-joblib == 1.1.1
+joblib==0.17.0
 surprise == 1.0.2
 [tool.poetry.dependencies]
 python = "^3.8"
