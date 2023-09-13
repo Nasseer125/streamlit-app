@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import joblib
+import numpy as np
 
 # Charger le modèle hybride
 hybrid_model = joblib.load("svdpp_model.pkl")
